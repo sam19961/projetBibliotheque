@@ -1,0 +1,14 @@
+LIVRE1:  [titre]Relativity [auteur]:Albert Einstein [annee]:1916 [nombre de pages]:220 [collection]:SBP [resume]:un livre de science
+
+VIDEO1:  [nom]:Titanic [duree]:194 [auteur]:James Cameron [maison de prod]:20th Century Fox
+
+DVD1:  [nom]:Avatar [duree]:162 [auteur]:James Cameron [maison de prod]:Dune Entertainment [nombre de pistes]:2
+
+RESSOURCE NUMERIQUE1:  [nom]:du lesa.txt [auteur]:jean michel [taille]:123 [chemin d'acces]:C://ici/maybela/avoila [format]:PDF
+
+LIVRE2:  [titre]Une brève histoire [auteur]:Stephen Hawking [annee]:1988 [nombre de pages]:236 [collection]:Flammarion [resume]:un autre livre de science
+
+REVUE1:  [titre]science et vie [auteur]:myke [annee]:2005 [nombre de pages]:200 [collection]:hsbc [resume]:une revue de science [editeur]le S [nombre d'articles]
+
+CD1:  [nom]:Polak [duree]:50 [auteur]:PLK [maison de prod]:Fifou [nombre de pistes]:12
+

@@ -1,0 +1,4 @@
+[nom]:Titanic [duree]:194 [auteur]:James Cameron [maison de prod]:20th Century Fox
+
+[nom]:Avatar [duree]:162 [auteur]:James Cameron [maison de prod]:Dune Entertainment [nombre de pistes]:2
+
