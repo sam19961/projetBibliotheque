@@ -33,7 +33,7 @@ int Revue::iswhat()
 QString Revue::informations()
 {
     QString buffer;
-    buffer += "Revue: ";
+    buffer += "REVUE: ";
     buffer += "[titre]:";
     buffer += m_titre;
     buffer += "; [auteur]:";
@@ -46,10 +46,10 @@ QString Revue::informations()
     buffer += m_collection;
     buffer += "; [resume]:";
     buffer += m_resume;
-    buffer += "; [editeur]";
+    buffer += "; [editeur]:";
     buffer += m_editeur;
-    buffer += "; [nombre d'articles]";
-    buffer += m_nb_article;
+    buffer += "; [nombre d'articles]:";
+    buffer += QString::number(m_nb_article);
     return buffer;
 }
 

@@ -44,17 +44,19 @@ void DVD::affichage()
 }
 
 int DVD::iswhat()
-{
-  return 4;
+{    
+    return 4; //enum pour cd/dvd
 }
 
 QString DVD::informations()
 {
     QString buffer;
-    if(m_flag == 1)
+    if(m_flag == 1){
         buffer += "DVD: ";
-    else
+    }
+    else{
         buffer += "CD: ";
+    }
     buffer += "[nom]:";
     buffer += m_nom_video;
     buffer += "; [duree]:";

@@ -76,18 +76,28 @@ QString RessourceNum::informations()
     return buffer;
 }
 
-void RessourceNum::ajouterressource(int taille, QString auteur, format type, QString nom, QString chemin)
-{
+void RessourceNum::ajouterressource(int taille, QString auteur, QString type, QString nom, QString chemin)
+{    
+    if(type == "PDF"){
+        m_type = PDF;
+    }
+    else if(type == "DOC"){
+        m_type = DOC;
+    }
+    else if(type == PPT){
+        m_type = PPT;
+    }
+    else {
+        m_type = inconnu;
+    }
     m_taille = taille;
-    m_auteur = auteur;
-    m_type = type;
+    m_auteur = auteur;    
     m_nom = nom;
     m_cheminAcces = chemin;
 }
 
 void RessourceNum::set_format(QString mot)
-{
-    format formatBuffer;
+{    
     if(mot == "PDF")
         m_type = PDF;
     else if(mot == "DOC")

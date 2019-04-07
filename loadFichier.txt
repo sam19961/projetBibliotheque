@@ -1,0 +1,17 @@
+1LIVRE: [titre]:Roi Lion; [auteur]:Baloo; [annee]:166; [nombre de pages]:777; [collection]:test; [resume]:test
+
+1VIDEO: [nom]:Avateuch; [duree]:42; [auteur]:marc dorbell; [maison de prod]:its seazzy
+
+1DVD: [nom]:testdvd; [duree]:1; [auteur]:testdvd; [maison de prod]:test dvd; [nombre de pistes]:1
+
+1Ressource Numerique: [nom]:testRessource; [auteur]:testRessource; [taille]:1; [chemin d'acces]:testRessource; [format]:PDF
+
+1REVUE: [titre]:science et vie; [auteur]:myke; [annee]:2005; [nombre de pages]:200; [collection]:hsbc; [resume]:une revue de science; [editeur]le S; [nombre d'articles]1
+
+2LIVRE: [titre]:Une brève histoire; [auteur]:Stephen Hawking; [annee]:1988; [nombre de pages]:236; [collection]:Flammarion; [resume]:un autre livre de science
+
+2Ressource Numerique: [nom]:si ca chemar; [auteur]:on se met bien; [taille]:777; [chemin d'acces]:le test est passé; [format]:DOC
+
+2DVD: [nom]:enfance; [duree]:1; [auteur]:samuel Umtiti; [maison de prod]:easy; [nombre de pistes]:555
+
+2VIDEO: [nom]:Avawah; [duree]:33; [auteur]:marc dordill; [maison de prod]:fuck its me

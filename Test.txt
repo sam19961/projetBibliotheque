@@ -1,0 +1,5 @@
+
+
+LIVRE: [titre]:gloubi; [auteur]:merde; [annee]:1123; [nombre de pages]:12; [collection]:cahrabiza; [resume]:boulga
+
+LIVRE: [titre]:dzad; [auteur]:zazdad; [annee]:12; [nombre de pages]:21; [collection]:dazd; [resume]:zdad

@@ -16,7 +16,7 @@ Objet::~Objet()
 
 void Objet::affichage()
 {
-  qDebug() << "nope\n";
+  qDebug() << "Un objet non définit\n";
 }
 
 int Objet::iswhat()
@@ -76,7 +76,7 @@ int Livre::iswhat()
 QString Livre::informations()
 {
     QString buffer;
-    buffer += "Livre: ";
+    buffer += "LIVRE: ";
     buffer += "[titre]:";
     buffer += m_titre;
     buffer += "; [auteur]:";

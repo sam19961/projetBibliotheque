@@ -20,24 +20,25 @@ void Bibliotheque::ajouter(Objet& obj)
   BaseDeDonnee.push_back(&obj);
 }
 
-void Bibliotheque::egale(Bibliotheque biblio)
-{
-  for(QList<Objet*>::iterator it = biblio.armoire.begin(); it != biblio.armoire.end(); ++it){
+void Bibliotheque::egale(Bibliotheque biblio1)
+{    
+  for(QList<Objet*>::iterator it = biblio1.armoire.begin(); it != biblio1.armoire.end(); ++it){
       armoire.push_back(*it);
-      BaseDeDonnee.push_back(*it);
+      BaseDeDonnee.push_back(*it);      
   }
 
 }
 
 void Bibliotheque::affichage()
-{
+{    
+
   if(armoire.empty()){
     qDebug() << "la bibliotheque est vide\n";
   }
   else{
     QList<Objet*>::iterator it;
     for(it = armoire.begin(); it != armoire.end(); ++(it)){
-      (*it)->affichage();
+      (*it)->affichage();      
     }
   }
 }
@@ -113,6 +114,52 @@ QFile* Bibliotheque::sauvegarde(QFile* filename)//essayer avec un enum pour armo
     return filename;
 }
 
+void Bibliotheque::sauvegarde_biblio(QFile* filename)
+{
+    int cptLivre(1), cptVideo(1), cptDvd(1), cptRessource(1), cptRevue(1), cptCD(1);
+    QList<Objet*>::iterator it;
+    if (filename->open(QFile::WriteOnly)) {
+        QTextStream out(filename);
+        for(it = BaseDeDonnee.begin(); it!=BaseDeDonnee.end(); ++it){
+            if((*it)->iswhat() == 1){
+                out << cptLivre;
+                ++cptLivre;
+            }
+            else if((*it)->iswhat() == 2){
+                out << cptRevue;
+                ++cptRevue;
+            }
+            else if((*it)->iswhat() == 3){
+                out << cptVideo;
+                ++cptVideo;
+            }
+            else if((*it)->iswhat() == 4){
+                if(!(*it)->CD_DVD()){
+                    out << cptCD;
+                    ++cptCD;
+                }
+                else{
+                    out << cptDvd;
+                    ++cptDvd;
+                }
+
+            }
+            else if((*it)->iswhat() == 5){
+                out << cptRessource;
+                ++cptRessource;
+            }
+            else {
+                out << "erreur fct sauvegarde";
+            }
+
+            out << (*it)->informations();
+            out << "\n\n";
+        }
+    }
+    filename->close();
+
+}
+
 
 void Bibliotheque::recherche(QString mot, QFile* filename) //fenetre differente pas le numero des objets
 {   //cherche un mot dans BaseDeDonnee et affiche l'objet en entier dans filename
@@ -131,7 +178,11 @@ void Bibliotheque::recherche(QString mot, QFile* filename) //fenetre differente 
     else {
         qCritical() << "erreur ouverture de fichier fct recherche" << endl;
     }
-    BaseDeDonnee.swap(*BufferList); //creer une seconde liste pour mettre à jour BaseDeDonnee
+
+    if(!BufferList->empty()){
+        BaseDeDonnee.swap(*BufferList);
+    }
+
     filename->close();
 }
 
@@ -197,13 +248,32 @@ void Bibliotheque::load(QFile *filename)
             listVideo.push_back(videoBuffer);
             i = 0;
          }
-        else if(word.contains("DVD") || word.contains("CD")){
+        else if(word.contains("DVD")){
             QString line = in.readLine();
             QStringList  fields = line.split(":");
             for(it=fields.begin() + 2; it!=fields.end();++it){
                 QStringList fields1 = (*it).split(";");
                 switch(i){
-                    case 0: nom = fields1.value(0); break;
+                    case 0: nom = fields1.value(0);break;
+                    case 1: duree = fields1.value(0).toInt(); break;
+                    case 2: auteur = fields1.value(0); break;
+                    case 3: maison = fields1.value(0); break;
+                    case 4: piste = fields1.value(0).toInt(); break;
+                }
+                ++i;
+            }
+            DVD *dvdBuffer = new DVD;            
+            dvdBuffer->ajouterdvd(duree, auteur, maison, nom, piste, 1);
+            listDVD.push_back(dvdBuffer);
+            i = 0;
+         }
+        else if(word.contains("CD")){
+            QString line = in.readLine();
+            QStringList  fields = line.split(":");
+            for(it=fields.begin() + 1; it!=fields.end();++it){
+                QStringList fields1 = (*it).split(";");
+                switch(i){
+                    case 0: nom = fields1.value(0);break;
                     case 1: duree = fields1.value(0).toInt(); break;
                     case 2: auteur = fields1.value(0); break;
                     case 3: maison = fields1.value(0); break;
@@ -212,10 +282,7 @@ void Bibliotheque::load(QFile *filename)
                 ++i;
             }
             DVD *dvdBuffer = new DVD;
-            if(word.contains("DVD"))
-                dvdBuffer->ajouterdvd(duree, auteur, maison, nom, piste, 1);
-            else
-                dvdBuffer->ajouterdvd(duree, auteur, maison, nom, piste, 0);
+            dvdBuffer->ajouterdvd(duree, auteur, maison, nom, piste, 0);
             listDVD.push_back(dvdBuffer);
             i = 0;
          }
@@ -234,7 +301,7 @@ void Bibliotheque::load(QFile *filename)
                 ++i;
             }
             RessourceNum *ressourceBuffer = new RessourceNum;
-            ressourceBuffer->ajouterressource(taille, auteur, inconnu, nom, chemin);
+            ressourceBuffer->ajouterressource(taille, auteur, type1, nom, chemin);
             ressourceBuffer->set_format(type1);
             listRessource.push_back(ressourceBuffer);
             i = 0;
@@ -256,7 +323,7 @@ void Bibliotheque::load(QFile *filename)
                 }
                 ++i;
             }
-            Revue *revueBuffer = new Revue;
+            Revue *revueBuffer = new Revue;            
             revueBuffer->ajouterrevue(auteur, annee, page, collection, titre, resume, editeur, articles);
             listRevue.push_back(revueBuffer);
             i = 0;
@@ -269,8 +336,12 @@ void Bibliotheque::load(QFile *filename)
 
 
     int cpt(0);
+    if(!armoire.empty()){
+        armoire.erase(armoire.begin(), armoire.end());
+    }
+
     for(QList<Livre*>::iterator it3 = listLivre.begin(); it3 != listLivre.end(); ++it3){
-        armoire.push_back(listLivre.value(cpt));
+        armoire.push_back(listLivre.value(cpt));        
         cpt++;
     }
     cpt=0;
@@ -358,22 +429,18 @@ void Bibliotheque::tri_donnee() ///tri de l'armoire et de la base de donnee livr
 }
 
 
-void Bibliotheque::Clear(QFile *filename) /// met base de donnee = armoire et l'affiche dans le fichier
-{
-    QTextStream out(filename);
+void Bibliotheque::Clear() /// met base de donnee = armoire et l'affiche dans le fichier
+{    
     QList<Objet*>::iterator it;
-    if(!armoire.empty()){
-        BaseDeDonnee = armoire;
-    }
-    if(filename->open(QFile::WriteOnly)){
-        for(it=BaseDeDonnee.begin(); it!=BaseDeDonnee.end(); ++it){
-            out << (*it)->informations();
-            out << "\n\n";
+    BaseDeDonnee.erase(BaseDeDonnee.begin(), BaseDeDonnee.end());
+    if(!armoire.empty()){        
+        for(it = armoire.begin(); it != armoire.end(); ++it){
+            BaseDeDonnee.push_back(*it);
         }
     }
     else {
-        qCritical() << "erreur ouverture de fichier fct recherche" << endl;
-    }
+        qCritical() << "erreur, armoire vide fonction clear" << endl;
+    }                
 }
 
 void Bibliotheque::deleteId(int numero_objet) //numero objet commence a 1 (utilisateur entre 1 ou plus)
@@ -395,3 +462,29 @@ void Bibliotheque::deleteId(int numero_objet) //numero objet commence a 1 (utili
         ++cpt;
     }
 }
+
+
+QString Bibliotheque::information_biblio(QFile *filename)
+{
+    QString buffer;
+    QTextStream in(filename);
+    if(!filename->open(QIODevice::ReadOnly)) {
+        QMessageBox::information(0,"error",filename->errorString());
+    }
+    while(!in.atEnd()){
+        QString line = in.readLine();
+        buffer += line;
+        buffer += "\n";
+    }
+    return buffer;
+}
+
+int Bibliotheque::taille_biblio()
+{
+    int i(0);
+    for(QList<Objet*>::iterator it = armoire.begin(); it != armoire.end(); ++it){
+        ++i;
+    }
+    return i;
+}
+

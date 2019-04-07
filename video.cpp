@@ -41,7 +41,7 @@ int Video::iswhat()
 QString Video::informations()
 {
     QString buffer;
-    buffer += "Video: ";
+    buffer += "VIDEO: ";
     buffer += "[nom]:";
     buffer += m_nom_video;
     buffer += "; [duree]:";

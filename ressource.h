@@ -9,7 +9,7 @@ public:
   RessourceNum();
   RessourceNum(int taille, QString auteur, format type, QString nom, QString chemin);
   ~RessourceNum();
-  void ajouterressource(int taille, QString auteur, format type, QString nom, QString chemin);
+  void ajouterressource(int taille, QString auteur, QString type, QString nom, QString chemin);
   static int nb_RessourceNum();
   void affiche_type();
   void affichage();

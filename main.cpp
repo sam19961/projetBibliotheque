@@ -1,4 +1,6 @@
 #include "bibliotheque.cpp"
+
+#define TAB_MAX 2
 // includes: livre->revue->video->dvd->ressource->biblio->main
 // ajouter auteur sur fenetrelivre
 // fonction de recherche/clear/show id/list
@@ -19,6 +21,7 @@ int main(int argc, char *argv[])
     Revue rev1("myke",2005,200,"hsbc","science et vie","une revue de science","le S",3);
     DVD c1(50,"PLK","Fifou","Polak",12,0);
     ///devoir faire une bibliotheque avec 20 elements -> realisme
+    Livre vide("inconnu", 0, 0, "inconnu", "inconnu", "inconnu");
 
     b1.ajouter(l1);
     b1.ajouter(v1);
@@ -28,7 +31,9 @@ int main(int argc, char *argv[])
     b1.ajouter(rev1);
     b1.ajouter(l1);
     b1.ajouter(c1);
-
+    for(int i = 0; i<TAB_MAX;++i){
+        b1.ajouter(vide);
+    }
     b2.egale(b1);
     b2.affichage();
     //b1.affichage();
@@ -49,7 +54,6 @@ int main(int argc, char *argv[])
     ///test fct clear
     /*b1.Clear(&labaseRecherche);
     b1.afficher_BaseDeDonnee();*/
-
 
     ///load from base
     /*QFile exemple_fichier("../../../../BiblioTest/loadFichier.txt");
