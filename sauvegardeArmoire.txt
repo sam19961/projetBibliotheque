@@ -1,14 +1,14 @@
-1LIVRE: [titre]:Relativity; [auteur]:Albert Einstein; [annee]:1916; [nombre de pages]:220; [collection]:SBP; [resume]:un livre de science
+1LIVRE: [titre]:Relativity; [auteur]:Albert Einstein; [annee]:1916; [nombre de pages]:220; [collection]:SBP; [resume]:un livre de science; [id]:1
 
-1VIDEO: [nom]:Titanic; [duree]:194; [auteur]:James Cameron; [maison de prod]:20th Century Fox
+1VIDEO: [nom]:Titanic; [duree]:194; [auteur]:James Cameron; [maison de prod]:20th Century Fox; [id]:2
 
-1DVD: [nom]:Avatar; [duree]:162; [auteur]:James Cameron; [maison de prod]:Dune Entertainment; [nombre de pistes]:2
+1DVD: [nom]:Avatar; [duree]:162; [auteur]:James Cameron; [maison de prod]:Dune Entertainment; [nombre de pistes]:2; [id]:3
 
-1Ressource Numerique: [nom]:du lesa.txt; [auteur]:jean michel; [taille]:123; [chemin d'acces]:C//ici/maybela/avoila; [format]:PDF
+1Ressource Numerique: [nom]:du lesa.txt; [auteur]:jean michel; [taille]:123; [chemin d'acces]:C//ici/maybela/avoila; [format]:PDF; [id]:4
 
-2LIVRE: [titre]:Une brève histoire; [auteur]:Stephen Hawking; [annee]:1988; [nombre de pages]:236; [collection]:Flammarion; [resume]:un autre livre de science
+2LIVRE: [titre]:Une brève histoire; [auteur]:Stephen Hawking; [annee]:1988; [nombre de pages]:236; [collection]:Flammarion; [resume]:un autre livre de science; [id]:5
 
-1REVUE: [titre]:science et vie; [auteur]:myke; [annee]:2005; [nombre de pages]:200; [collection]:hsbc; [resume]:une revue de science; [editeur]:le S; [nombre d'articles]:3
+1REVUE: [titre]:science et vie; [auteur]:myke; [annee]:2005; [nombre de pages]:200; [collection]:hsbc; [resume]:une revue de science; [editeur]:le S; [nombre d'articles]:3; [id]:0
 
-1CD: [nom]:Polak; [duree]:50; [auteur]:PLK; [maison de prod]:Fifou; [nombre de pistes]:12
+1CD: [nom]:Polak; [duree]:50; [auteur]:PLK; [maison de prod]:Fifou; [nombre de pistes]:12; [id]:7
 

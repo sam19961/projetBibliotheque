@@ -10,8 +10,8 @@
 
 2LIVRE: [titre]:Une brève histoire; [auteur]:Stephen Hawking; [annee]:1988; [nombre de pages]:236; [collection]:Flammarion; [resume]:un autre livre de science
 
-2Ressource Numerique: [nom]:si ca chemar; [auteur]:on se met bien; [taille]:777; [chemin d'acces]:le test est passé; [format]:DOC
+2Ressource Numerique: [nom]:le site; [auteur]:on se met bien; [taille]:777; [chemin d'acces]:le test est passé; [format]:DOC
 
 2DVD: [nom]:enfance; [duree]:1; [auteur]:samuel Umtiti; [maison de prod]:easy; [nombre de pistes]:555
 
-2VIDEO: [nom]:Avawah; [duree]:33; [auteur]:marc dordill; [maison de prod]:fuck its me
+2VIDEO: [nom]:Avawah; [duree]:33; [auteur]:marc dordill; [maison de prod]:benProd

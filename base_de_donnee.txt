@@ -1,2 +1,2 @@
-1CD: [nom]:Polak; [duree]:50; [auteur]:PLK; [maison de prod]:Fifou; [nombre de pistes]:12
+1CD: [nom]:Polak; [duree]:50; [auteur]:PLK; [maison de prod]:Fifou; [nombre de pistes]:12; [id]:7
 

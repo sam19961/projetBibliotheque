@@ -10,7 +10,7 @@ Bibliotheque::Bibliotheque()
 Bibliotheque::~Bibliotheque()
 {
   --compteur_bibliotheque;
-  armoire.erase(armoire.begin(), armoire.end());
+    armoire.erase(armoire.begin(), armoire.end()); //question de destruction ???
 
 }
 
@@ -56,19 +56,7 @@ void Bibliotheque::afficher_BaseDeDonnee()
     }
 }
 
-void Bibliotheque::effacer()
-{
-  if(!armoire.empty()){
-    armoire.erase(armoire.begin(), armoire.end());
-  }
-
-  if(!BaseDeDonnee.empty()){
-      BaseDeDonnee.erase(BaseDeDonnee.begin(), BaseDeDonnee.end());
-  }
-}
-
-
-QFile* Bibliotheque::sauvegarde(QFile* filename)//essayer avec un enum pour armoire ou base de donnee
+QFile* Bibliotheque::sauvegarde(QFile* filename)
 {
     int cptLivre(1), cptVideo(1), cptDvd(1), cptRessource(1), cptRevue(1), cptCD(1);
     QList<Objet*>::iterator it;
@@ -114,7 +102,7 @@ QFile* Bibliotheque::sauvegarde(QFile* filename)//essayer avec un enum pour armo
     return filename;
 }
 
-void Bibliotheque::sauvegarde_biblio(QFile* filename)
+void Bibliotheque::sauvegarde_base_de_donnee(QFile* filename)
 {
     int cptLivre(1), cptVideo(1), cptDvd(1), cptRessource(1), cptRevue(1), cptCD(1);
     QList<Objet*>::iterator it;
@@ -205,8 +193,12 @@ void Bibliotheque::load(QFile *filename)
     QList<QString>::iterator it2;
 
     QString collection, titre, resume, auteur, maison, nom, chemin, editeur, type1;
-    int annee, page, duree, piste, taille, articles, i(0);
+    int annee, page, duree, piste, taille, articles, id, i(0);
 
+
+    if(!armoire.empty()){
+        armoire.erase(armoire.begin(), armoire.end());
+    }
 
     while(!in.atEnd()){
         QString word = in.read(4);
@@ -222,12 +214,14 @@ void Bibliotheque::load(QFile *filename)
                     case 3: page = fields1.value(0).toInt(); break;
                     case 4: collection = fields1.value(0); break;
                     case 5: resume = fields1.value(0); break;
+                    case 6: id = fields1.value(0).toInt(); break;
                 }
                 ++i;
             }
             Livre *livreBuffer = new Livre;
-            livreBuffer->ajouterlivre(auteur, annee, page, collection, titre, resume);
-            listLivre.push_back(livreBuffer);
+            livreBuffer->ajouterlivre(auteur, annee, page, collection, titre, resume, id);
+            //listLivre.push_back(livreBuffer);
+            armoire.push_back(livreBuffer);
             i = 0;
          }
         else if(word.contains("VID")){
@@ -240,12 +234,14 @@ void Bibliotheque::load(QFile *filename)
                     case 1: duree = fields1.value(0).toInt(); break;
                     case 2: auteur = fields1.value(0); break;
                     case 3: maison = fields1.value(0); break;
+                    case 4: id= fields1.value(0).toInt(); break;
                 }
                 ++i;
             }
             Video *videoBuffer = new Video;
-            videoBuffer->ajoutervideo(duree, auteur, maison, nom);
-            listVideo.push_back(videoBuffer);
+            videoBuffer->ajoutervideo(duree, auteur, maison, nom, id);
+            //listVideo.push_back(videoBuffer);
+            armoire.push_back(videoBuffer);
             i = 0;
          }
         else if(word.contains("DVD")){
@@ -259,12 +255,14 @@ void Bibliotheque::load(QFile *filename)
                     case 2: auteur = fields1.value(0); break;
                     case 3: maison = fields1.value(0); break;
                     case 4: piste = fields1.value(0).toInt(); break;
+                    case 5: id= fields1.value(0).toInt(); break;
                 }
                 ++i;
             }
             DVD *dvdBuffer = new DVD;            
-            dvdBuffer->ajouterdvd(duree, auteur, maison, nom, piste, 1);
-            listDVD.push_back(dvdBuffer);
+            dvdBuffer->ajouterdvd(duree, auteur, maison, nom, piste, 1, id);
+           // listDVD.push_back(dvdBuffer);
+            armoire.push_back(dvdBuffer);
             i = 0;
          }
         else if(word.contains("CD")){
@@ -278,12 +276,14 @@ void Bibliotheque::load(QFile *filename)
                     case 2: auteur = fields1.value(0); break;
                     case 3: maison = fields1.value(0); break;
                     case 4: piste = fields1.value(0).toInt(); break;
+                    case 5: id = fields1.value(0).toInt(); break;
                 }
                 ++i;
             }
             DVD *dvdBuffer = new DVD;
-            dvdBuffer->ajouterdvd(duree, auteur, maison, nom, piste, 0);
-            listDVD.push_back(dvdBuffer);
+            dvdBuffer->ajouterdvd(duree, auteur, maison, nom, piste, 0, id);
+            //listDVD.push_back(dvdBuffer);
+            armoire.push_back(dvdBuffer);
             i = 0;
          }
         else if(word.contains("Res")){
@@ -297,13 +297,15 @@ void Bibliotheque::load(QFile *filename)
                     case 2: taille = fields1.value(0).toInt(); break;
                     case 3: chemin = fields1.value(0); break;
                     case 4: type1 = fields1.value(0); break;
+                    case 5: id = fields1.value(0).toInt(); break;
                 }
                 ++i;
             }
             RessourceNum *ressourceBuffer = new RessourceNum;
-            ressourceBuffer->ajouterressource(taille, auteur, type1, nom, chemin);
+            ressourceBuffer->ajouterressource(taille, auteur, type1, nom, chemin, id);
             ressourceBuffer->set_format(type1);
-            listRessource.push_back(ressourceBuffer);
+            //listRessource.push_back(ressourceBuffer);
+            armoire.push_back(ressourceBuffer);
             i = 0;
          }
         else if(word.contains("REV")){
@@ -320,12 +322,14 @@ void Bibliotheque::load(QFile *filename)
                     case 5: resume = fields1.value(0); break;
                     case 6: editeur = fields1.value(0); break;
                     case 7: articles = fields1.value(0).toInt(); break;
+                    case 8: id = fields1.value(0).toInt(); break;
                 }
                 ++i;
             }
             Revue *revueBuffer = new Revue;            
-            revueBuffer->ajouterrevue(auteur, annee, page, collection, titre, resume, editeur, articles);
-            listRevue.push_back(revueBuffer);
+            revueBuffer->ajouterrevue(auteur, annee, page, collection, titre, resume, editeur, articles, id);
+            //listRevue.push_back(revueBuffer);
+            armoire.push_back(revueBuffer);
             i = 0;
          }
         else {
@@ -335,8 +339,8 @@ void Bibliotheque::load(QFile *filename)
     }
 
 
-    int cpt(0);
-    if(!armoire.empty()){
+    //int cpt(0);
+   /* if(!armoire.empty()){
         armoire.erase(armoire.begin(), armoire.end());
     }
 
@@ -363,70 +367,47 @@ void Bibliotheque::load(QFile *filename)
     for(QList<RessourceNum*>::iterator it3 = listRessource.begin(); it3 != listRessource.end(); ++it3){
         armoire.push_back(listRessource.value(cpt));
         cpt++;
-    }
+    }*/
 
     filename->close(); //non necessaire
 
 }
 
-void Bibliotheque::tri_donnee() ///tri de l'armoire et de la base de donnee livre->revue->video->dvd/cd->ressource
+void Bibliotheque::tri_donnee(tri choix) ///tri de l'armoire et de la base de donnee livre->revue->video->dvd/cd->ressource
 {
+    //tri a bulle
+    //complexiter ameliorable
+    //refaire tri rapide avec auteur et id
+    QList<Objet*>::iterator it1, it2;
     int i(0), j(0);
-    QList<Objet*>::iterator it, it2, itbase, itbase2;
-    for(it=armoire.begin(); it != armoire.end(); ++it){
-        j = i;
-        for(it2=it; it2 != armoire.end(); ++it2){
-            if((*it2)->iswhat() == 1 && (*it)->iswhat() != 1){
-                armoire.swap(i, j);
-            }
-            else if((*it)->iswhat() == 2 && (*it)->iswhat() != 2){
-                armoire.swap(i, j);
-            }
-            else if((*it)->iswhat() == 3 && (*it)->iswhat() != 3){
-                armoire.swap(i, j);
-            }
-            else if((*it)->iswhat() == 4 && (*it)->iswhat() != 4){
-                armoire.swap(i, j);
-            }
-            else if((*it)->iswhat() == 5 && (*it)->iswhat() != 5){
-                armoire.swap(i, j);
-            }
-            else {
-                qCritical() << "erreur fct tri de donnee" << endl;
-            }
-            ++j;
-        }
-        ++i;
-    }
 
-    i = 0;
-    j = 0;
-    for(itbase=armoire.begin(); itbase != armoire.end(); ++itbase){
-        j = i;
-        for(itbase2=it; itbase2 != armoire.end(); ++itbase2){
-            if((*itbase2)->iswhat() == 1 && (*itbase)->iswhat() != 1){
-                BaseDeDonnee.swap(i, j);
+    if(choix == auteur){
+        for(it1 = armoire.begin(); it1 != armoire.end(); ++it1){
+            for(it2 = it1; it2 != armoire.end(); ++it2){
+                if((*it1)->get_auteur().front().toLower() > (*it2)->get_auteur().front().toLower()){
+                    armoire.swap(i, j);
+                }
+                ++j;
             }
-            else if((*itbase)->iswhat() == 2 && (*itbase)->iswhat() != 2){
-                BaseDeDonnee.swap(i, j);
-            }
-            else if((*itbase)->iswhat() == 3 && (*itbase)->iswhat() != 3){
-                BaseDeDonnee.swap(i, j);
-            }
-            else if((*itbase)->iswhat() == 4 && (*itbase)->iswhat() != 4){
-                BaseDeDonnee.swap(i, j);
-            }
-            else if((*itbase)->iswhat() == 5 && (*itbase)->iswhat() != 5){
-                BaseDeDonnee.swap(i, j);
-            }
-            else {
-                qCritical() << "erreur fct tri de donnee" << endl;
-            }
-            ++j;
+            ++i;
+            j = i;
         }
-        ++i;
+    }
+    else {
+        for(it1 = armoire.begin(); it1 != armoire.end(); ++it1){
+            for(it2 = it1; it2 != armoire.end(); ++it2){
+                if((*it1)->get_id() > (*it2)->get_id()){
+                    armoire.swap(i, j);
+                }
+                ++j;
+            }
+            ++i;
+            j = i;
+        }
     }
 }
+
+
 
 
 void Bibliotheque::Clear() /// met base de donnee = armoire et l'affiche dans le fichier
@@ -444,7 +425,7 @@ void Bibliotheque::Clear() /// met base de donnee = armoire et l'affiche dans le
 }
 
 void Bibliotheque::deleteId(int numero_objet) //numero objet commence a 1 (utilisateur entre 1 ou plus)
-{
+{//recoder pour avoir en fonction de l'id
     int cpt(0);
     for(QList<Objet*>::iterator it = armoire.begin(); it != armoire.end(); ++it){
         if(cpt == (numero_objet-1)){
@@ -487,4 +468,73 @@ int Bibliotheque::taille_biblio()
     }
     return i;
 }
+
+int Bibliotheque::doublon()
+{
+    //complexite ameliorable
+    int i(0), j(0), indice(-1), nb_fois(0);
+    QList<Objet*>::iterator it, it2;
+    for(it = armoire.begin(); it != armoire.end(); ++it){        
+        for(it2 = it; it2 != armoire.end(); ++it2){
+            if((it2 != it) && ((*it2)->get_id() == (*it)->get_id())){
+                ++nb_fois;
+                indice = j;                
+            }
+            ++j;            
+        }
+        ++i;
+        j = i;        
+    }
+
+    if(indice != -1)
+        armoire.removeAt(indice);
+
+    return nb_fois;
+}
+
+QString Bibliotheque::information_armoire()
+{
+    QString buffer;
+    int cptLivre(1), cptVideo(1), cptDvd(1), cptRessource(1), cptRevue(1), cptCD(1);
+    QList<Objet*>::iterator it;
+        for(it = armoire.begin(); it!=armoire.end(); ++it){
+            if((*it)->iswhat() == 1){
+                buffer += QString::number(cptLivre);
+                ++cptLivre;
+            }
+            else if((*it)->iswhat() == 2){
+                buffer += QString::number(cptRevue);
+                ++cptRevue;
+            }
+            else if((*it)->iswhat() == 3){
+                buffer += QString::number(cptVideo);
+                ++cptVideo;
+            }
+            else if((*it)->iswhat() == 4){
+                if(!(*it)->CD_DVD()){
+                    buffer += QString::number(cptCD);
+                    ++cptCD;
+                }
+                else{
+                    buffer += QString::number(cptDvd);
+                    ++cptDvd;
+                }
+
+            }
+            else if((*it)->iswhat() == 5){
+                buffer += QString::number(cptRessource);
+                ++cptRessource;
+            }
+            else {
+                buffer += "erreur fct sauvegarde";
+            }
+
+            buffer += (*it)->informations();
+            buffer += "\n\n";
+        }
+
+    return buffer;
+
+}
+
 

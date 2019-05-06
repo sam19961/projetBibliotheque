@@ -1,3 +1,5 @@
+#ifndef DVD_H
+#define DVD_H
 #include "video.h"
 
 
@@ -6,9 +8,9 @@ class DVD : public Video
 public:
 
   DVD();
-  DVD(int duree, QString auteur, QString maison, QString nom, int piste, int flag);
+  DVD(int duree, QString auteur, QString maison, QString nom, int piste, int flag, int id);
   virtual ~DVD();
-  void ajouterdvd(int duree, QString auteur, QString maison, QString nom, int piste, int flag);
+  void ajouterdvd(int duree, QString auteur, QString maison, QString nom, int piste, int flag, int id);
   static int nb_DVD();
   virtual void affichage();
   virtual int iswhat();
@@ -22,3 +24,4 @@ protected:
   static int compteur_DVD;
 
 };
+#endif

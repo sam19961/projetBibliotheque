@@ -13,30 +13,29 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     Bibliotheque b1, b2;
-    Livre l1("Albert Einstein",1916,220,"SBP","Relativity","un livre de science");
-    Video v1(194, "James Cameron", "20th Century Fox", "Titanic");
-    DVD d1(162, "James Cameron", "Dune Entertainment", "Avatar", 2, 1);
-    RessourceNum r1(123, "jean michel", PDF, "du lesa.txt", "C://ici/maybela/avoila");
-    Livre l2("Stephen Hawking",1988,236,"Flammarion","Une brève histoire","un autre livre de science");
-    Revue rev1("myke",2005,200,"hsbc","science et vie","une revue de science","le S",3);
-    DVD c1(50,"PLK","Fifou","Polak",12,0);
-    ///devoir faire une bibliotheque avec 20 elements -> realisme
-    Livre vide("inconnu", 0, 0, "inconnu", "inconnu", "inconnu");
+    Livre l1("Albert Einstein",1916,220,"SBP","Relativity","un livre de science", 1);
+    Video v1(194, "James Cameron", "20th Century Fox", "Titanic", 10);
+    DVD d1(162, "James Cameron", "Dune Entertainment", "Avatar", 2, 1, 2);
+    RessourceNum r1(123, "jean michel", PDF, "du lesa.txt", "C://ici/maybela/avoila", 7);
+    Livre l2("Stephen Hawking",1988,236,"Flammarion","Une brève histoire","un autre livre de science", 5);
+    Revue rev1("myke",2005,200,"hsbc","science et vie","une revue de science","le S",3, 6);
+    DVD c1(50,"PLK","Fifou","Polak",12,0,12);
+    Livre essai("test1",777,777,"test1","test1","test1", 2);
+    ///devoir faire une bibliotheque avec 20 elements -> realisme   
 
     b1.ajouter(l1);
     b1.ajouter(v1);
     b1.ajouter(d1);
     b1.ajouter(r1);
     b1.ajouter(l2);
-    b1.ajouter(rev1);
-    b1.ajouter(l1);
+    b1.ajouter(rev1);    
     b1.ajouter(c1);
-    for(int i = 0; i<TAB_MAX;++i){
-        b1.ajouter(vide);
-    }
-    b2.egale(b1);
-    b2.affichage();
-    //b1.affichage();
+    b1.ajouter(essai);
+    b1.affichage();
+    int lel = b1.doublon();
+    qDebug() << "un peu apres \n \n" << endl;
+    b1.affichage();
+
 
     /// Sauvegarde dans base
     /*QFile labase("../../../../BiblioTest/sauvegardeArmoire.txt");

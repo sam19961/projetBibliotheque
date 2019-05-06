@@ -13,7 +13,7 @@ DVD::DVD(): Video()
   m_nbPiste = 0;
 }
 
-DVD::DVD(int duree, QString auteur, QString maison, QString nom, int piste, int flag): Video(duree, auteur, maison, nom)
+DVD::DVD(int duree, QString auteur, QString maison, QString nom, int piste, int flag, int id): Video(duree, auteur, maison, nom, id)
 , m_nbPiste(piste)
 {
   ++compteur_DVD;
@@ -36,9 +36,11 @@ int DVD::CD_DVD()
 void DVD::affichage()
 {
   if(m_flag == 1)
-    qDebug() <<"DVD: " << m_duree << "  " << m_auteur << "  " << m_maisonProduction << "  " << m_nom_video << "  " << m_nbPiste << "\n";
+    qDebug() <<"DVD: " << m_duree << "[auteur]:  " << m_auteur << "[maison de prod]:  "
+            << m_maisonProduction << "[nom] " << m_nom_video << "[nombre piste]" << m_nbPiste << "[id]:" << m_id << "\n";
   else if(m_flag == 0)
-    qDebug() <<"CD: " << m_duree << "  " << m_auteur << "  " << m_maisonProduction << "  " << m_nom_video << "  " << m_nbPiste << "\n";
+    qDebug() <<"CD: "  << m_duree << "[auteur]:  " << m_auteur << "[maison de prod]:  "
+            << m_maisonProduction << "[nom] " << m_nom_video << "[nombre piste]" << m_nbPiste << "[id]:" << m_id << "\n";
   else
     qCritical() << "erreur de la fonction affichage DVD" << endl;
 }
@@ -67,10 +69,11 @@ QString DVD::informations()
     buffer += m_maisonProduction;
     buffer += "; [nombre de pistes]:";
     buffer += QString::number(m_nbPiste);
+    buffer += Objet::informations();
     return buffer;
 }
 
-void DVD::ajouterdvd(int duree, QString auteur, QString maison, QString nom, int piste, int flag)
+void DVD::ajouterdvd(int duree, QString auteur, QString maison, QString nom, int piste, int flag, int id)
 {
     m_duree = duree;
     m_auteur = auteur;
@@ -78,4 +81,5 @@ void DVD::ajouterdvd(int duree, QString auteur, QString maison, QString nom, int
     m_nom_video = nom;
     m_nbPiste = piste;
     m_flag = flag;
+    m_id = id;
 }

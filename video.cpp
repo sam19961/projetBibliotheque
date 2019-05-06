@@ -16,8 +16,8 @@ Video::Video(): Objet()
   m_nom_video = "inconnu";
 }
 
-Video::Video(int duree, QString auteur, QString maison, QString nom): Objet(), m_duree(duree),
-m_auteur(auteur), m_maisonProduction(maison), m_nom_video(nom)
+Video::Video(int duree, QString auteur, QString maison, QString nom, int id): Objet(auteur, id), m_duree(duree),
+m_maisonProduction(maison), m_nom_video(nom)
 {
   ++compteur_Video;
 }
@@ -29,7 +29,7 @@ Video::~Video()
 
 void Video::affichage()
 {
-  qDebug() << "Video" << m_duree << "  " << m_auteur << "  " << m_maisonProduction << "  " << m_nom_video << "\n";
+  qDebug() << "Video" << m_duree << "  " << m_auteur << "  " << m_maisonProduction << "  " << m_nom_video << m_id <<  "\n";
 }
 
 
@@ -50,13 +50,15 @@ QString Video::informations()
     buffer += m_auteur;
     buffer += "; [maison de prod]:";
     buffer += m_maisonProduction;
+    buffer += Objet::informations();
     return buffer;
 }
 
-void Video::ajoutervideo(int duree, QString auteur, QString maison, QString nom)
+void Video::ajoutervideo(int duree, QString auteur, QString maison, QString nom, int id)
 {
     m_duree = duree;
     m_auteur = auteur;
     m_maisonProduction = maison;
     m_nom_video = nom;
+    m_id = id;
 }
