@@ -17,7 +17,7 @@ RessourceNum::RessourceNum()
   m_cheminAcces = "inconnu";
 }
 
-RessourceNum::RessourceNum(int taille, QString auteur, format type, QString nom, QString chemin, int id): Objet(auteur, id),
+RessourceNum::RessourceNum(int taille, QString auteur, format type, QString nom, QString chemin, int id, QString emprunt): Objet(auteur, id, emprunt),
 m_type(type), m_nom(nom), m_cheminAcces(chemin)
  {
    ++compteur_RessourceNum;
@@ -41,6 +41,7 @@ void RessourceNum::affiche_type()
 
 void RessourceNum::affichage()
 {
+  Objet::affichage();
   qDebug() << "Ressource Numerique: " << m_auteur << "  " << m_taille << "  " << m_nom << "  " << m_cheminAcces << "  " << m_id << " ";
   affiche_type();
 }
@@ -78,7 +79,7 @@ QString RessourceNum::informations()
     return buffer;
 }
 
-void RessourceNum::ajouterressource(int taille, QString auteur, QString type, QString nom, QString chemin, int id)
+void RessourceNum::ajouterressource(int taille, QString auteur, QString type, QString nom, QString chemin, int id, QString emprunt)
 {    
     if(type == "PDF"){
         m_type = PDF;
@@ -97,6 +98,7 @@ void RessourceNum::ajouterressource(int taille, QString auteur, QString type, QS
     m_nom = nom;
     m_cheminAcces = chemin;
     m_id = id;
+    m_emprunt = emprunt;
 }
 
 void RessourceNum::set_format(QString mot)

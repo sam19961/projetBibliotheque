@@ -13,7 +13,7 @@ DVD::DVD(): Video()
   m_nbPiste = 0;
 }
 
-DVD::DVD(int duree, QString auteur, QString maison, QString nom, int piste, int flag, int id): Video(duree, auteur, maison, nom, id)
+DVD::DVD(int duree, QString auteur, QString maison, QString nom, int piste, int flag, int id, QString emprunt): Video(duree, auteur, maison, nom, id, emprunt)
 , m_nbPiste(piste)
 {
   ++compteur_DVD;
@@ -35,6 +35,7 @@ int DVD::CD_DVD()
 
 void DVD::affichage()
 {
+  Objet::affichage();
   if(m_flag == 1)
     qDebug() <<"DVD: " << m_duree << "[auteur]:  " << m_auteur << "[maison de prod]:  "
             << m_maisonProduction << "[nom] " << m_nom_video << "[nombre piste]" << m_nbPiste << "[id]:" << m_id << "\n";
@@ -47,7 +48,7 @@ void DVD::affichage()
 
 int DVD::iswhat()
 {    
-    return 4; //enum pour cd/dvd
+    return 4;
 }
 
 QString DVD::informations()
@@ -73,7 +74,7 @@ QString DVD::informations()
     return buffer;
 }
 
-void DVD::ajouterdvd(int duree, QString auteur, QString maison, QString nom, int piste, int flag, int id)
+void DVD::ajouterdvd(int duree, QString auteur, QString maison, QString nom, int piste, int flag, int id, QString emprunt)
 {
     m_duree = duree;
     m_auteur = auteur;
@@ -82,4 +83,5 @@ void DVD::ajouterdvd(int duree, QString auteur, QString maison, QString nom, int
     m_nbPiste = piste;
     m_flag = flag;
     m_id = id;
+    m_emprunt = emprunt;
 }

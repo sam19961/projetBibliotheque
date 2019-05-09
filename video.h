@@ -7,9 +7,9 @@ class Video : public Objet
 public:
 
   Video();
-  Video(int duree, QString auteur, QString maison, QString nom, int id);
+  Video(int duree, QString auteur, QString maison, QString nom, int id, QString emprunt);
   virtual ~Video();
-  void ajoutervideo(int duree, QString auteur, QString maison, QString nom, int id);
+  void ajoutervideo(int duree, QString auteur, QString maison, QString nom, int id, QString emprunt);
   static int nb_Video();
   virtual void affichage();
   virtual int iswhat();

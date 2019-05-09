@@ -9,11 +9,12 @@ Objet::Objet()
   ++compteur_Objet;
 }
 
-Objet::Objet(QString auteur, int id)
+Objet::Objet(QString auteur, int id, QString emprunt)
 {
   ++compteur_Objet;
   m_auteur = auteur;
   m_id = id;
+  m_emprunt = emprunt;
 }
 
 Objet::~Objet()
@@ -24,6 +25,7 @@ Objet::~Objet()
 void Objet::affichage()
 {
   qDebug() << "[auteur]: " << m_auteur;
+  qDebug() << "[emprunt]: " << m_emprunt;
 }
 
 int Objet::iswhat()
@@ -41,6 +43,8 @@ QString Objet::informations()
     QString buffer;
     buffer += "; [id]:";
     buffer += QString::number(m_id);
+    buffer += "; [emprunt]:";
+    buffer += m_emprunt;
     return buffer;
 }
 
@@ -53,6 +57,13 @@ QString Objet::get_auteur()
 {
     return m_auteur;
 }
+
+
+void Objet::prendre(int pris)
+{
+    (pris == 1)?m_emprunt = "pas dispo":m_emprunt = "dispo";
+}
+
 
 int Livre::nb_Livre()
 {
@@ -71,7 +82,7 @@ Livre::Livre() : Objet()
 
 }
 
-Livre::Livre(QString auteur, int annee, int page, QString collection, QString titre, QString resume, int id): Objet(auteur, id),
+Livre::Livre(QString auteur, int annee, int page, QString collection, QString titre, QString resume, int id, QString emprunt): Objet(auteur, id, emprunt),
 m_nbPage(page), m_collection(collection), m_titre(titre), m_resume(resume)
 {
   ++compteur_Livre;
@@ -87,7 +98,7 @@ void Livre::affichage()
 {
   qDebug() << "Livre:";
   Objet::affichage();
-  qDebug() << m_annee << "  " << m_nbPage << "  " << m_titre << m_id << "exemple d'utilisation de l'affichage objet "<< "\n";
+  qDebug() << m_annee << "  " << m_nbPage << "  " << m_titre << m_id << "exemple d'utilisation de l'affichage objet "<< "\n";  
 
 }
 
@@ -116,7 +127,7 @@ QString Livre::informations()
     return buffer;
 }
 
-void Livre::ajouterlivre(QString auteur, int annee, int page, QString collection, QString titre, QString resume, int id)
+void Livre::ajouterlivre(QString auteur, int annee, int page, QString collection, QString titre, QString resume, int id, QString emprunt)
 {
     m_auteur = auteur;
     m_annee = annee;
@@ -125,4 +136,5 @@ void Livre::ajouterlivre(QString auteur, int annee, int page, QString collection
     m_titre = titre;
     m_resume = resume;
     m_id = id;
+    m_emprunt = emprunt;
 }

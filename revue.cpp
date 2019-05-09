@@ -7,8 +7,8 @@ Revue::Revue()
     ++compteur_Revue;
 }
 
-Revue::Revue(QString auteur, int annee, int page, QString collection, QString titre, QString resume, QString editeur, int nb_article, int id)
-    :Livre(auteur,annee,page,collection,titre,resume,id), m_editeur(editeur), m_nb_article(nb_article)
+Revue::Revue(QString auteur, int annee, int page, QString collection, QString titre, QString resume, QString editeur, int nb_article, int id, QString emprunt)
+    :Livre(auteur,annee,page,collection,titre,resume,id,emprunt), m_editeur(editeur), m_nb_article(nb_article)
 {
     ++compteur_Revue;
 }
@@ -20,6 +20,7 @@ Revue::~Revue()
 
 void Revue::affichage()
 {
+  Objet::affichage();
   qDebug() << "Revue: " << m_annee << "  " << m_nbPage << "  " << m_auteur << "  " << m_titre << "  " << m_editeur << "  "
            << m_nb_article << m_id << "\n";
 
@@ -54,7 +55,7 @@ QString Revue::informations()
     return buffer;
 }
 
-void Revue::ajouterrevue(QString auteur, int annee, int page, QString collection, QString titre, QString resume, QString editeur, int nb_article, int id)
+void Revue::ajouterrevue(QString auteur, int annee, int page, QString collection, QString titre, QString resume, QString editeur, int nb_article, int id, QString emprunt)
 {
     m_auteur = auteur;
     m_annee = annee;
@@ -65,4 +66,5 @@ void Revue::ajouterrevue(QString auteur, int annee, int page, QString collection
     m_editeur = editeur;
     m_nb_article = nb_article;
     m_id = id;
+    m_emprunt = emprunt;
 }

@@ -25,6 +25,8 @@ public:
   void Clear(); //armoire = BaseDedonnee
   void deleteId(int numero_objet);
   int doublon(); //efface les éventuels doublons dans la bibliothèque
+  void emprunter_objet(int numero_objet);
+  void rendre_objet(int numero_objet);
 
 protected:
   QList<Objet*> armoire;

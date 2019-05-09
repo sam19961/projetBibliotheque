@@ -8,13 +8,13 @@ class DVD : public Video
 public:
 
   DVD();
-  DVD(int duree, QString auteur, QString maison, QString nom, int piste, int flag, int id);
+  DVD(int duree, QString auteur, QString maison, QString nom, int piste, int flag, int id, QString emprunt);
   virtual ~DVD();
-  void ajouterdvd(int duree, QString auteur, QString maison, QString nom, int piste, int flag, int id);
+  void ajouterdvd(int duree, QString auteur, QString maison, QString nom, int piste, int flag, int id, QString emprunt);
   static int nb_DVD();
   virtual void affichage();
   virtual int iswhat();
-  virtual int CD_DVD();
+  virtual int CD_DVD(); //renvoie le flag pour savoir si on a un cd ou un dvd
   virtual QString informations();
 
 protected:
