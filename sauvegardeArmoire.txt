@@ -10,5 +10,19 @@
 
 1REVUE: [titre]:science et vie; [auteur]:myke; [annee]:2005; [nombre de pages]:200; [collection]:hsbc; [resume]:une revue de science; [editeur]:le S; [nombre d'articles]:3; [id]:0; [emprunt]:dispo
 
-1CD: [nom]:Polak; [duree]:50; [auteur]:PLK; [maison de prod]:Fifou; [nombre de pistes]:12; [id]:7; [emprunt]:dispo
+1CD: [nom]:Polak; [duree]:110; [auteur]:PLK; [maison de prod]:Fifou; [nombre de pistes]:12; [id]:7; [emprunt]:dispo
+
+3LIVRE: [titre]:Les misérables; [auteur]:Victor Hugo; [annee]:1862; [nombre de pages]:2400; [collection]:Kindle; [resume]:un livre connu; [id]:16; [emprunt]:dispo
+
+4LIVRE: [titre]:Harry Potter; [auteur]:JK Rowling; [annee]:2001; [nombre de pages]:308; [collection]:Bloomsburry; [resume]:un beau livre; [id]:22; [emprunt]:dispo
+
+2CD: [nom]:Nabil et Tarek; [duree]:120; [auteur]:PNL; [maison de prod]:QLF records; [nombre de pistes]:17; [id]:58; [emprunt]:dispo
+
+3CD: [nom]:Omar; [duree]:140; [auteur]:Alpha Wann; [maison de prod]:Universal; [nombre de pistes]:20; [id]:777; [emprunt]:dispo
+
+2VIDEO: [nom]:Avengers; [duree]:180; [auteur]:Russo; [maison de prod]:Marvel studio; [id]:54; [emprunt]:dispo
+
+3VIDEO: [nom]:Watchmen; [duree]:111; [auteur]:Alan Moore; [maison de prod]:DC Comics; [id]:19; [emprunt]:dispo
+
+4VIDEO: [nom]:Creed; [duree]:121; [auteur]:Ryan Coogler; [maison de prod]:New line; [id]:27; [emprunt]:dispo
 

@@ -165,7 +165,7 @@ void Bibliotheque::recherche(QString mot, QFile* filename) //fenetre differente 
     if(filename->open(QFile::WriteOnly)){
         for(it=BaseDeDonnee.begin(); it!=BaseDeDonnee.end(); ++it){
          if((*it)->informations().contains(mot, Qt::CaseInsensitive)){
-             //on utilise a fonction contains de QString qui est déja codé sur Qt
+             //on utilise la fonction contains de QString qui est déja codé sur Qt
              out << (*it)->informations();
              out << "\n\n";
              BufferList->push_back((*it));

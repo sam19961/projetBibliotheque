@@ -1,2 +1,2 @@
-1CD: [nom]:Polak; [duree]:50; [auteur]:PLK; [maison de prod]:Fifou; [nombre de pistes]:12; [id]:7
+1VIDEO: [nom]:Titanic; [duree]:194; [auteur]:James Cameron; [maison de prod]:20th Century Fox; [id]:2; [emprunt]:dispo
 

@@ -6,6 +6,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QMessageBox>
+#include <QDateTime>
 
 class Objet
 {
@@ -20,7 +21,7 @@ public:
   virtual int CD_DVD();
   int get_id();
   QString get_auteur();
-  void prendre(int pris); //indique si l'objet est emprunté par le client
+  void prendre(int pris); //permet d'afficher "dispo" ou "pas dispo" pour l'attribut "emprunt"
 
 protected:
   QString m_auteur;
