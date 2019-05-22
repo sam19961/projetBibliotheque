@@ -8,6 +8,9 @@
 #include <QMessageBox>
 #include <QDateTime>
 
+#include "../serveurside/fenserveur.h"
+#include "../clientside/clientside.h"
+
 class Objet
 {
 public:

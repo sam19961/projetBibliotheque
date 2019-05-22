@@ -14,14 +14,14 @@ Bibliotheque::~Bibliotheque()
 
 }
 
-//ajoute un objet dans l'armoire et dans la base de donnée
+//ajoute un objet dans l armoire et dans la base de donnee
 void Bibliotheque::ajouter(Objet& obj)
 {
   armoire.push_back(&obj);
   BaseDeDonnee.push_back(&obj);
 }
 
-//on aurait pu surcharger l'opérateur "=" de la bibliothèque pour cette fonction
+//on aurait pu surcharger l opérateur "=" de la bibliotheque pour cette fonction
 void Bibliotheque::egale(Bibliotheque biblio1)
 {    
   for(QList<Objet*>::iterator it = biblio1.armoire.begin(); it != biblio1.armoire.end(); ++it){
@@ -31,7 +31,7 @@ void Bibliotheque::egale(Bibliotheque biblio1)
 
 }
 
-//affiche l'ensemble de la bibliothèque (uniquement l'armoire)
+//affiche l ensemble de la bibliotheque (uniquement l armoire)
 void Bibliotheque::affichage()
 {    
   if(armoire.empty()){
@@ -45,7 +45,7 @@ void Bibliotheque::affichage()
   }
 }
 
-//idem pour la base de donées
+//idem pour la base de donees
 void Bibliotheque::afficher_BaseDeDonnee()
 {
     if(BaseDeDonnee.empty()){
@@ -59,10 +59,10 @@ void Bibliotheque::afficher_BaseDeDonnee()
     }
 }
 
-//sauvegarde de l'armoire dans un fichier
+//sauvegarde de l armoire dans un fichier
 QFile* Bibliotheque::sauvegarde(QFile* filename)
 {
-    //on créer des compteurs pour savoir le nombre d'objet du même type présent dans la bibliothèque
+    //on creer des compteurs pour savoir le nombre d objet du meme type present dans la bibliotheque
     int cptLivre(1), cptVideo(1), cptDvd(1), cptRessource(1), cptRevue(1), cptCD(1);
     QList<Objet*>::iterator it;
     if (filename->open(QFile::WriteOnly)) {
@@ -99,13 +99,13 @@ QFile* Bibliotheque::sauvegarde(QFile* filename)
                 out << "erreur fct sauvegarde";
             }
 
-            //une fois qu'on a le numéro de l'objet on prend un QString renvoyé par la fonction "information"
+            //une fois qu on a le numéro de l objet on prend un QString renvoyd par la fonction "information"
             //afin de le mettre dans le fichier txt
             out << (*it)->informations();
             out << "\n\n";
         }
     }
-    filename->close(); //on ferme le fichier manuellement pour éviter toute erreur
+    filename->close(); //on ferme le fichier manuellement pour eviter toute erreur
     return filename;
 }
 
@@ -114,7 +114,7 @@ void Bibliotheque::sauvegarde_base_de_donnee(QFile* filename)
 {
     int cptLivre(1), cptVideo(1), cptDvd(1), cptRessource(1), cptRevue(1), cptCD(1);
     QList<Objet*>::iterator it;
-    if (filename->open(QFile::WriteOnly)) { //ouverture du fichier en écriture seule
+    if (filename->open(QFile::WriteOnly)) { //ouverture du fichier en ecriture seule
         QTextStream out(filename);
         for(it = BaseDeDonnee.begin(); it!=BaseDeDonnee.end(); ++it){
             if((*it)->iswhat() == 1){
@@ -158,14 +158,14 @@ void Bibliotheque::sauvegarde_base_de_donnee(QFile* filename)
 
 
 void Bibliotheque::recherche(QString mot, QFile* filename) //fenetre differente pas le numero des objets
-{   //cherche un mot dans BaseDeDonnee et affiche l'objet en entier dans filename
+{   //cherche un mot dans BaseDeDonnee et affiche l objet en entier dans filename
     QList<Objet*> *BufferList = new QList<Objet*>;
     QTextStream out(filename);
     QList<Objet*>::iterator it;
     if(filename->open(QFile::WriteOnly)){
         for(it=BaseDeDonnee.begin(); it!=BaseDeDonnee.end(); ++it){
          if((*it)->informations().contains(mot, Qt::CaseInsensitive)){
-             //on utilise la fonction contains de QString qui est déja codé sur Qt
+             //on utilise la fonction contains de QString qui est déja code sur Qt
              out << (*it)->informations();
              out << "\n\n";
              BufferList->push_back((*it));
@@ -176,7 +176,7 @@ void Bibliotheque::recherche(QString mot, QFile* filename) //fenetre differente 
         qCritical() << "erreur ouverture de fichier fct recherche" << endl;
     }
 
-    //on utilise un buffer qu'on met dans la base de données à la fin
+    //on utilise un buffer qu on met dans la base de donnees a la fin
     if(!BufferList->empty()){
         BaseDeDonnee.swap(*BufferList);
     }
@@ -196,18 +196,18 @@ void Bibliotheque::load(QFile *filename)
 
     QList<QString>::iterator it, it2;
 
-    //buffer pour récuperer les différents attributs dans le fichier
+    //buffer pour recuperer les différents attributs dans le fichier
     QString collection, titre, resume, auteur, maison, nom, chemin, editeur, type1, emprunt;
     int annee, page, duree, piste, taille, articles, id, i(0);
 
-    //on efface l'armoire avant de le remplir avec les nouveaux éléments
+    //on efface l armoire avant de le remplir avec les nouveaux éléments
     if(!armoire.empty()){
         armoire.erase(armoire.begin(), armoire.end());
     }
 
     //exemple d'une ligne dans le fichier txt
-    //1LIVRE: [titre]:Relativity; [auteur]:Albert Einstein; [annee]:1916
-    //les lignes suivantes sont un ensemple de procédés ne s'appliquant qu'à ce type de fichier pour extraire les attributs
+    //1LIVRE: [titre]:Relativity; [auteur]:Albert Einstein; [annee]:1916 [...]
+    //les lignes suivantes sont un exemple de procédés ne s appliquant qu a ce type de fichier pour extraire les attributs
     while(!in.atEnd()){
         QString word = in.read(4);
         if(word.contains("LIV")){
@@ -515,7 +515,7 @@ QString Bibliotheque::information_armoire()
 
 }
 
-//fait passer l'attribut d'un objet de "disponible" à "non disponible"
+//fait passer l attribut d'un objet de "disponible" à "non disponible"
 void Bibliotheque::emprunter_objet(int numero_objet)
 {
     int cpt(0);
@@ -536,7 +536,7 @@ void Bibliotheque::emprunter_objet(int numero_objet)
     }
 }
 
-//fait passer l'attribut d'un objet de "non disponible" à "disponible"
+//fait passer l attribut d'un objet de "non disponible" à "disponible"
 void Bibliotheque::rendre_objet(int numero_objet)
 {
     int cpt(0);
